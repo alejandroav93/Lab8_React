@@ -1,13 +1,16 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import "./gameover.css";
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import './gameover.css';
 
-const Finish = ({ handleRestart, showModal, bestScore, moves }) => {
+function Finish({
+  // eslint-disable-next-line react/prop-types
+  handleRestart, showModal, bestScore, moves,
+}) {
   return (
     <div>
       <Dialog
@@ -23,7 +26,13 @@ const Finish = ({ handleRestart, showModal, bestScore, moves }) => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alertMessage">
-            Haz realizado {moves} movimientos. Mejor Puntaje: {bestScore}
+            Haz realizado
+            {' '}
+            {moves}
+            {' '}
+            movimientos. Mejor Puntaje:
+            {' '}
+            {bestScore}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -34,6 +43,6 @@ const Finish = ({ handleRestart, showModal, bestScore, moves }) => {
       </Dialog>
     </div>
   );
-};
+}
 
 export default Finish;

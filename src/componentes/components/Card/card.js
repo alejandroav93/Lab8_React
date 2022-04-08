@@ -1,17 +1,24 @@
-import React from "react";
-import "./card.css";
-import backpic from "../../image/backs.png";
-import classnames from "classnames";
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React from 'react';
+import './card.css';
+import classnames from 'classnames';
+import backpic from '../../image/backs.png';
 
-const Card = ({ onClick, card, index, isInactive, isFlipped, isDisabled }) => {
+function Card({
+  // eslint-disable-next-line react/prop-types
+  onClick, card, index, isInactive, isFlipped, isDisabled,
+}) {
   const handleClick = () => {
     !isFlipped && !isDisabled && onClick(index);
   };
   return (
     <div
-      className={classnames("card", {
-        "is-flipped": isFlipped,
-        "is-inactive": isInactive,
+      className={classnames('card', {
+        'is-flipped': isFlipped,
+        'is-inactive': isInactive,
       })}
       onClick={handleClick}
     >
@@ -23,5 +30,5 @@ const Card = ({ onClick, card, index, isInactive, isFlipped, isDisabled }) => {
       </div>
     </div>
   );
-};
+}
 export default Card;

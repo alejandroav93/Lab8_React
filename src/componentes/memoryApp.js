@@ -1,10 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
-import uniqueCardsArray from "./data.js";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "./components/Header/header.js";
-import { Col, Container, Row } from "react-bootstrap";
-import Card from "./components/Card/card.js";
-import Finish from "./components/GameOver/gameover.js";
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-shadow */
+/* eslint-disable react/no-array-index-key */
+import { Col, Container, Row } from 'react-bootstrap';
+import React, { useEffect, useRef, useState } from 'react';
+import cardsArray from './cards';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from './components/Header/header';
+import Card from './components/Card/card';
+import Finish from './components/GameOver/gameover';
 
 // FisherYates Modern Shuffle Algorithm
 // Fuente: https://www.youtube.com/watch?v=tLxBwSL3lPQ&t=422s
@@ -14,7 +17,8 @@ function swap(array, i, j) {
   array[j] = temp;
 }
 function randomizer(array) {
-  const length = array.length;
+  const { length } = array;
+  /* eslint no-plusplus: ["error", { "allowForLoopAfterthoughts": true }] */
   for (let i = length; i > 0; i--) {
     const randomIndex = Math.floor(Math.random() * i);
     const currentIndex = i - 1;
@@ -23,17 +27,15 @@ function randomizer(array) {
   return array;
 }
 
-const GameApp = () => {
-  const [cards, setCards] = useState(() =>
-    randomizer(uniqueCardsArray.concat(uniqueCardsArray))
-  );
+function GameApp() {
+  const [cards, setCards] = useState(() => randomizer(cardsArray.concat(cardsArray)));
   const [openCards, setOpencards] = useState([]);
   const [matchedCards, setMatchedcards] = useState({});
   const [moves, setMoves] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [shouldDisableAllCards, setShouldDisableAllCards] = useState(false);
   const [bestScore, setBestScore] = useState(
-    JSON.parse(localStorage.getItem("bestScore")) || Number.POSITIVE_INFINITY
+    JSON.parse(localStorage.getItem('bestScore')) || Number.POSITIVE_INFINITY,
   );
   const timeout = useRef(null);
 
@@ -46,11 +48,11 @@ const GameApp = () => {
   };
 
   const checkCompletion = () => {
-    if (Object.keys(matchedCards).length === uniqueCardsArray.length) {
+    if (Object.keys(matchedCards).length === cardsArray.length) {
       setShowModal(true);
       const highScore = Math.min(moves, bestScore);
       setBestScore(highScore);
-      localStorage.setItem("bestScore", highScore);
+      localStorage.setItem('bestScore', highScore);
     }
   };
 
@@ -91,19 +93,15 @@ const GameApp = () => {
     checkCompletion();
   }, [matchedCards]);
 
-  const checkIsFlipped = (index) => {
-    return openCards.includes(index);
-  };
-  const checkIsInactive = (card) => {
-    return Boolean(matchedCards[card.type]);
-  };
+  const checkIsFlipped = (index) => openCards.includes(index);
+  const checkIsInactive = (card) => Boolean(matchedCards[card.type]);
   const handleRestart = () => {
     setMatchedcards({});
     setOpencards([]);
     setShowModal(false);
     setMoves(0);
     setShouldDisableAllCards(false);
-    setCards(randomizer(uniqueCardsArray.concat(uniqueCardsArray)));
+    setCards(randomizer(cardsArray.concat(cardsArray)));
   };
 
   return (
@@ -115,21 +113,19 @@ const GameApp = () => {
       />
       <Container>
         <Row>
-          {cards.map((card, index) => {
-            return (
-              <Col xs={6} md={3} lg={2}>
-                <Card
-                  key={index}
-                  card={card}
-                  index={index}
-                  isDisabled={shouldDisableAllCards}
-                  isInactive={checkIsInactive(card)}
-                  isFlipped={checkIsFlipped(index)}
-                  onClick={handleCardClick}
-                />
-              </Col>
-            );
-          })}
+          {cards.map((card, index) => (
+            <Col xs={6} md={3} lg={2}>
+              <Card
+                key={index}
+                card={card}
+                index={index}
+                isDisabled={shouldDisableAllCards}
+                isInactive={checkIsInactive(card)}
+                isFlipped={checkIsFlipped(index)}
+                onClick={handleCardClick}
+              />
+            </Col>
+          ))}
         </Row>
       </Container>
       <Finish
@@ -140,6 +136,6 @@ const GameApp = () => {
       />
     </div>
   );
-};
+}
 
 export default GameApp;

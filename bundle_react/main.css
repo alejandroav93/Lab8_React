@@ -96,13 +96,12 @@ button:hover {
 }
 
 .is-inactive {
-  /* visibility: hidden; */
   opacity: 0;
 }
 
-/*!**************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./src/componentes/components/Finish/gameover.css ***!
-  \**************************************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/componentes/components/GameOver/gameover.css ***!
+  \****************************************************************************************************/
 .MuiDialog-paperWidthSm {
   max-width: null !important;
   width: 80% !important;

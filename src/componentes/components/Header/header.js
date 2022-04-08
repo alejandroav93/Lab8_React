@@ -1,9 +1,12 @@
-import React from "react";
-import "./header.css";
-import { Container } from "react-bootstrap";
-import { FaRedo } from "react-icons/fa";
+/* eslint-disable react/button-has-type */
+/* eslint-disable jsx-a11y/control-has-associated-label */
+import React from 'react';
+import './header.css';
+import { Container } from 'react-bootstrap';
+import { FaRedo } from 'react-icons/fa';
 
-const Header = ({ moves, bestScore, handleRestart }) => {
+// eslint-disable-next-line react/prop-types
+function Header({ moves, bestScore, handleRestart }) {
   return (
     <div>
       <h1>Lab 08: React - Memoria Pokémon</h1>
@@ -14,11 +17,9 @@ const Header = ({ moves, bestScore, handleRestart }) => {
             {moves}
           </div>
           <div className="reshuffle">
-            <button onClick={handleRestart}>
-              <FaRedo />
-            </button>
+            <button onClick={handleRestart}><FaRedo /></button>
           </div>
-          {localStorage.getItem("bestScore") && (
+          {localStorage.getItem('bestScore') && (
             <div className="high-score">
               <span>Mejor Puntaje: </span>
               {bestScore}
@@ -28,6 +29,6 @@ const Header = ({ moves, bestScore, handleRestart }) => {
       </Container>
     </div>
   );
-};
+}
 
 export default Header;
